@@ -1,0 +1,20 @@
+
+Ask the player to set the number of lives and the difficulty level of the game on LCD via keyboard. 
+Output the game screen to the player, while generating obstacles procedurally. 
+Ask the player's permission to continue before resuming the game when a life is lost. 
+Play the buzzer on different frequencies for various events in the game, such as at the start of the game, when a life is lost, and when the game ends. 
+Output the score of the game when it ends and ask the user for playing again.
+If time permits, a two-player version of the game will also be made, where two players would be able to compete for the highest score. This would involve attaching two separate LCDs and two buttons to the Arduino board.
+
+Some functions that will help me:
+lcd_print()
+lcd_clear()
+lcd_move_cursor(row, col)
+digital_read(pin) # For button
+classes => obstacle, Dino (maybe an parent "object")
+variables => difficulty level, no. of lives
+
+ideas => my custom print function, obstacle generation
+everything has to be kept track of in computer too.
+LCD should just be an output
+One thing we can do is maintain an array, and just output that array to the LCD
