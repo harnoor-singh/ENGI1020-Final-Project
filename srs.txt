@@ -14,7 +14,8 @@ digital_read(pin) # For button
 classes => obstacle, Dino (maybe an parent "object")
 variables => difficulty level, no. of lives
 
-ideas => my custom print function, obstacle generation
+# ideas
+my custom print function, obstacle generation
 everything has to be kept track of in computer too.
 LCD should just be an output
 One thing we can do is maintain an array, and just output that array to the LCD
