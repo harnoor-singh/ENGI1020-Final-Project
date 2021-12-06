@@ -2,7 +2,6 @@ from engi1020.arduino import *
 import random
 import time
 
-lcd_clear()
 
 class MyObject:
 	def __init__(self, x, y):
@@ -28,8 +27,11 @@ class Dino(MyObject):
 		else:
 			self.y == 1
 
-	def collision(self):
-		pass
+	def checkCollision(self, screen):
+		if screen[0][self.y] == 1:
+			return True
+		else:
+			return False
 
 
 
@@ -55,7 +57,8 @@ class Screen:
 	def set(self, new_window):
 		self.window = new_window
 
-	def displayToLCD(self, my_dino, obstacle, score):
+	def displayToLCD(self, my_dino):
+		obstacle = "#"
 		lcd_clear()
 		lcd_move_cursor(1, 0)
 		for row in self.window:
@@ -63,16 +66,16 @@ class Screen:
 			for cell in row:
 				lcd_move_cursor(self.window.index(row), index_cell + 1)
 				if cell == 1:
-					lcd_print(str(obstacle))
+					lcd_print(obstacle)
 				index_cell += 1
 
 		lcd_move_cursor(0, my_dino.y)
 		lcd_print(str(my_dino))
 
 		lcd_move_cursor(0, 12)
-		lcd_print(score)
-		#TODO: Implement No. of lives too!
-		
+		# lcd_print(score) # ERROR here for now
+		# TODO: Implement No. of lives too!
+		# TODO: Implement increase in score
 		
 
 
@@ -109,7 +112,7 @@ print(my_window.window)
 
 for i in range(0, 17):
 	my_window.updateState()
-	my_window.displayToLCD(my_dino, '#', 42)
+	my_window.displayToLCD(my_dino, 42)
 	print(my_window.window)
 	time.sleep(0.25)
 	
