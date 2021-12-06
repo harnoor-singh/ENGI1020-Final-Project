@@ -3,16 +3,12 @@ import random
 import time
 
 
-class MyObject:
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
 
 
-
-class Dino(MyObject):
+class Dino:
 	def __init__(self, y=1):
-		super().__init__(1, y)
+		self.x = 1
+		self.y = y
 
 	def __repr__(self):
 		# return '🦕'
@@ -24,32 +20,24 @@ class Dino(MyObject):
 	def move(self):
 		if self.y == 1:
 			self.y == 0
+			return self.y
 		else:
 			self.y == 1
+			return self.y
 
 	def checkCollision(self, screen):
-		if screen[0][self.y] == 1:
+		if screen.window[0][self.y] == 1:
 			return True
 		else:
 			return False
 
 
 
-class Obstacle(MyObject):
-	def __init__(self, x, y):
-		super().__init__(x, y)
-
-	@classmethod
-	def __str__(self):
-		return '#'
-
-
-
 
 class Screen:
 	def __init__(self):
-		self.window =  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+		self.window =  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 	def get(self):
 		return self.window
@@ -57,27 +45,27 @@ class Screen:
 	def set(self, new_window):
 		self.window = new_window
 
-	def displayToLCD(self, my_dino):
+	def displayToLCD(self, my_dino, score, lives):
 		obstacle = "#"
-		lcd_clear()
-		lcd_move_cursor(1, 0)
 		for row in self.window:
 			index_cell = 0
 			for cell in row:
 				lcd_move_cursor(self.window.index(row), index_cell + 1)
 				if cell == 1:
 					lcd_print(obstacle)
+				else:
+					lcd_print(" ")
 				index_cell += 1
-
-		lcd_move_cursor(0, my_dino.y)
+				
+		lcd_move_cursor(my_dino.y, 1)
 		lcd_print(str(my_dino))
 
 		lcd_move_cursor(0, 12)
-		# lcd_print(score) # ERROR here for now
-		# TODO: Implement No. of lives too!
-		# TODO: Implement increase in score
-		
+		lcd_print(int(score))
 
+		lcd_move_cursor(1, 12)
+		lcd_print("@" * lives)
+		
 
 
 	def updateState(self):
@@ -102,17 +90,20 @@ class Screen:
 		new_window[1].append(append_col[1])
 
 		self.set(new_window)
+
+class InputValidator:
+	pass
 		
+if __name__ == "__main__":
+	my_dino = Dino()
+	my_window = Screen()
+	my_window.displayToLCD(my_dino, 42, 3)
 
-my_dino = Dino()
-my_window = Screen()
-# my_window.displayToLCD(my_dino, '#', 42)
-
-print(my_window.window)
-
-for i in range(0, 17):
-	my_window.updateState()
-	my_window.displayToLCD(my_dino, 42)
 	print(my_window.window)
-	time.sleep(0.25)
+
+	for i in range(0, 17):
+		my_window.updateState()
+		my_window.displayToLCD(my_dino, 42, 3)
+		print(my_window.window)
+		time.sleep(0.1)
 	

@@ -1,0 +1,2 @@
+Index of dino is not changing when button is pressed.
+Lives are changing but not printing correctly to the screen
