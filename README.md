@@ -9,3 +9,6 @@ We have made a clone of Google Chrome Dinosaur's Game (without the gravity) and 
 
 To run the python code, you have to first run the requuired firmware on your Arduino, and pip install the required modules(namely engi1020).
 For instructions, please email/message me.
+
+The firmware files are in **fix** folder, and one has to upload them via Arduino IDE. 
+This is a temporary hack to make the LCD screen work, and I thank Prof. Lori Hogan for providing this solution.
