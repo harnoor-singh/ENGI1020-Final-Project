@@ -1,2 +1,4 @@
-Index of dino is not changing when button is pressed.
-Lives are changing but not printing correctly to the screen
+Dino doesn't get removed, and now a zero is also being printed.
+Solution - Implement dino in array itself.
+Lives are changing but not printing correctly to the screen.
+Control random.choice

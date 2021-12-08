@@ -7,7 +7,7 @@ import time
 
 class Dino:
 	def __init__(self, y=1):
-		self.x = 1
+		self.x = 0
 		self.y = y
 
 	def __repr__(self):
@@ -18,15 +18,14 @@ class Dino:
 		return (self.x, self.y)
 
 	def move(self):
+		print("MOVE called")
 		if self.y == 1:
-			self.y == 0
-			return self.y
+			return 0
 		else:
-			self.y == 1
-			return self.y
+			return 1
 
 	def checkCollision(self, screen):
-		if screen.window[0][self.y] == 1:
+		if screen.window[self.x][self.y] == 1:
 			return True
 		else:
 			return False
@@ -46,6 +45,7 @@ class Screen:
 		self.window = new_window
 
 	def displayToLCD(self, my_dino, score, lives):
+		print(self.window)
 		obstacle = "#"
 		for row in self.window:
 			index_cell = 0
@@ -57,8 +57,11 @@ class Screen:
 					lcd_print(" ")
 				index_cell += 1
 				
-		lcd_move_cursor(my_dino.y, 1)
+		lcd_move_cursor(my_dino.y, my_dino.x)
 		lcd_print(str(my_dino))
+
+		lcd_move_cursor(my_dino.y, int(not(bool(my_dino.x))))
+		lcd_print(self.window[my_dino.y][int(not(bool(my_dino.x)))])
 
 		lcd_move_cursor(0, 12)
 		lcd_print(int(score))
@@ -93,6 +96,10 @@ class Screen:
 
 class InputValidator:
 	pass
+
+
+
+
 		
 if __name__ == "__main__":
 	my_dino = Dino()
